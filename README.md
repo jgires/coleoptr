@@ -34,7 +34,7 @@ Voici un exemple à partir de noms de rue qui illustre les deux fonctions
 de `coleoptr`.
 
 La fonction `name_be_extract` permet de détecter et d’extraire les
-prénoms dans une chaîne de caractère (ici le nom de rue) :
+prénoms dans une chaîne de caractères (ici le nom de rue) :
 
 ``` r
 library(coleoptr)
@@ -121,12 +121,12 @@ d’indiquer avec l’option `nl_detect = TRUE` (utilisée dans l’exemple
 précédent) que l’on fait une recherche dans des champs écrits en
 néérlandais. La fonction opère alors une série de corrections en REGEX
 au préalable pour rendre possible la détection des prénoms accolés à un
-certain nombre de types d’objets/institutions (pour l’instant :
-uniquement voieries et institutions scolaires jusqu’au secondaire). Le
-soucis de cette procédure est qu’elle demande des corrections
-particulières à la nature des données. A terme, la solution est
-probablement de créer un dictionnaire de correction en néérlandais,
-reprenant de nombreux objets/institutions, pour englober le plus de cas
-possibles. Cette solution demande cependant un gros travail dont je ne
-sais pas s’il est réellement faisable. Si quelqu’un a une autre
-solution, je suis preneur.
+certain nombre d’objets/institutions (*pour l’instant : uniquement
+voieries et institutions scolaires jusqu’au secondaire*). Le soucis de
+cette procédure est qu’elle demande des corrections particulières à la
+nature des données. A terme, la solution est probablement de créer un
+dictionnaire de correction en néérlandais, reprenant de nombreux
+objets/institutions, pour englober le plus de cas possibles. Cette
+solution demande cependant un gros travail dont je ne sais pas s’il est
+réellement faisable. Si quelqu’un a une solution technique plus
+parcimonieuse et systématique, je suis preneur.
