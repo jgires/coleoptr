@@ -1,0 +1,13 @@
+Package: coleoptr
+Title: coleoptr détecte les prénoms et leur genre
+Version: 0.1
+Authors@R: 
+    person("Joël", "Girès", , "jgires@ccc.brussels", role = c("aut", "cre"))
+Description: coleoptr permet d'une part de détecter les prénoms dans des chaines de caractères et d'autre part de dire la probabilité d'appartenance de ces prénoms à chaque sexe.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Imports: dplyr, fuzzyjoin, readr, stringdist, stringr, tidyr
+LazyData: true
+Depends: R (>= 3.5.0)
