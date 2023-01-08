@@ -2,9 +2,9 @@
 #' name_be_genderize
 #'
 #' @param data_to_detect le data.frame d'interet
-#' @param col_name le nom de la colonne a genderiser
-#' @param reference le dictionnaire de prenoms de reference
-#' @param inexact indiquer si le matching doit etre inexact
+#' @param col_name le nom de la colonne qui contient les prenoms dont il faut trouver le genre
+#' @param reference le dictionnaire des prenoms de reference
+#' @param inexact indiquer si le matching doit etre inexact (probabiliste)
 #' @param method_stringdist la methode de matching inexact
 #' @param error_max l'erreur maximale du matching inexact
 #'

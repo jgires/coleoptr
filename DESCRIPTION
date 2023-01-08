@@ -11,3 +11,4 @@ RoxygenNote: 7.2.1
 Imports: dplyr, fuzzyjoin, readr, stringdist, stringr, tidyr
 LazyData: true
 Depends: R (>= 3.5.0)
+Language: fr

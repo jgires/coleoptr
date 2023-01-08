@@ -1,0 +1,74 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# coleoptr
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`coleoptr` permet :
+
+* de détecter les prénoms dans des chaines de caractères ;
+* de dire la probabilité d'appartenance des prénoms à chaque sexe.
+
+## Installation
+
+Vous pouvez installer la version de développement de coleoptr depuis [GitHub](https://github.com/) avec cette commande :
+
+``` r
+# install.packages("devtools")
+devtools::install_github("jgires/coleoptr")
+```
+
+## Example
+
+Voici un example qui exemplifie les deux fonctions de `coleoptr` : nous allons 1) détecter des prénoms contenus dans des noms de rue et 2) prédire le genre de ces prénoms.
+
+La fonction `name_be_extract` permet de détecter et d'extraire les prénoms dans une chaîne de caractère (ici le nom de rue) :
+
+```{r , warning = FALSE, message = FALSE,  results='hide'}
+library(coleoptr)
+x <- data.frame(rue = c("Avenue Paul Héger",
+                        "Jardin des Justes",
+                        "Chemin Marie Popelin",
+                        "Place Sainte-Catherine",
+                        "Avenue Paul Dejaer",
+                        "Rue de Molenbeek",
+                        "Boulevard Léopold III",
+                        "Avenue Sainte-Anne",
+                        "Rue Saints-Pierre et Paul"
+                        ))
+result <- name_be_extract(data_to_detect = x,
+                          col_to_detect = "rue")
+```
+
+```{r}
+result[,c("rue", "name_extracted_1", "name_extracted_2")]
+```
+
+La fonction `name_be_genderize` permet quand à elle de prédire le genre des prénoms. Elle peut s'appliquer sur les résultats de `name_be_extract` :
+
+```{r , warning = FALSE, message = FALSE,  results='hide'}
+result_genderized <- name_be_genderize(result,
+                                       col_name = "name_extracted_1")
+```
+
+```{r}
+result_genderized[,c("rue", "name_extracted_1", "prop_f", "prop_h", "genre_detected")]
+```
+
+## Options
+
+De nombreuses options existent et seront documentées plus tard...

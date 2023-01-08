@@ -1,15 +1,15 @@
 
 #' name_be_extract
 #'
-#' @param data_to_detect le data.frame d'interet
-#' @param col_to_detect le nom de la colonne dans laquelle detecter les presnoms
+#' @param data_to_detect le data.frame dans lequel detecter les prenoms
+#' @param col_to_detect le nom de la colonne qui contient les prenoms a detecter
 #' @param reference le dictionnaire des prenoms de reference
-#' @param numb_threshold le seuil de frequence minimale de prenoms pour le dictionnaire
-#' @param length_threshold le seuil de longueur minimale de prenoms pour le dictionnaire
-#' @param exclude_dico exclure les noms communs de la detection
+#' @param numb_threshold le seuil de frequence minimale des prenoms pour le dictionnaire
+#' @param length_threshold le seuil de longueur minimale des prenoms pour le dictionnaire
+#' @param exclude_dico exclure les noms communs frequents de la detection (en francais et neerlandais)
 #' @param spec_char_insens insensible aux caracteres speciaux dans la detection
-#' @param respect_boundaries respecter les frontieres des mots
-#' @param nl_street detection dans des noms de rue en neerlandais
+#' @param respect_boundaries respecte les frontieres des mots
+#' @param nl_street detection dans des rues en neerlandais
 #'
 #' @import dplyr
 #' @import readr
@@ -253,7 +253,6 @@ name_be_extract <- function(data_to_detect,
   data_to_detect <- data_to_detect %>%
     mutate(
       col_to_detect = str_replace_all(col_to_detect, "[-]", " "), # Pour supprimer les tirets, pour isoler les noms
-
       name_extracted = extract_name_all(col_to_detect)
     )
 
@@ -265,7 +264,7 @@ name_be_extract <- function(data_to_detect,
   cat(paste0("\n", "\u29D7", " Mise en forme du tableau"))
 
   data_to_detect <- data_to_detect %>%
-    unnest_wider(name_extracted, names_sep="_") %>%
+    unnest_wider(name_extracted, names_sep="_") %>% # Peut etre fait avec stringr directement pour supprimer la dep a tidyr
     mutate(
       across(
         starts_with("name_extracted_"),
