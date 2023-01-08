@@ -16,11 +16,11 @@ name_be_genderize(
 \arguments{
 \item{data_to_detect}{le data.frame d'interet}
 
-\item{col_name}{le nom de la colonne a genderiser}
+\item{col_name}{le nom de la colonne qui contient les prenoms dont il faut trouver le genre}
 
-\item{reference}{le dictionnaire de prenoms de reference}
+\item{reference}{le dictionnaire des prenoms de reference}
 
-\item{inexact}{indiquer si le matching doit etre inexact}
+\item{inexact}{indiquer si le matching doit etre inexact (probabiliste)}
 
 \item{method_stringdist}{la methode de matching inexact}
 

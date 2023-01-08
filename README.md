@@ -51,7 +51,7 @@ x <- data.frame(rue = c("Rue Albert Dekkers",
                         ))
 result <- name_be_extract(data_to_detect = x,
                           col_to_detect = "rue",
-                          nl_street = TRUE)
+                          nl_detect = TRUE)
 ```
 
 ``` r
@@ -102,27 +102,31 @@ result_genderized[,c("rue", "name_extracted_1", "prop_f", "prop_h", "genre_detec
 
 Plusieurs options existent et seront documentées plus tard…
 
-## Développement
+## Développements futurs ?
 
 Des difficultés spécifiques se posent dans la détection de prénoms en
-néérlandais (et sans doute en allemand), puisque le prénom est parfois
-collé au mot s’y rattachant. Par exemple, pour la rue *Katarinalaan*, le
-prénom et l’avenue (*laan*) forment un seul mot. La fonction
-`name_be_extract` peut tout à fait détecter et extraire les prénoms à
-l’intérieur de mots plus longs (en indiquant l’option
-`respect_boundaries = FALSE`), mais alors la fonction détecte un grand
-nombre de faux positifs : elle détecte pour *Place de Ninove* les
-prénoms *Lac* et *Nino*, par exemple (et le problème est le même en
+**néérlandais** (et sans doute en **allemand**), puisque le prénom est
+parfois accolé à l’objet/institution nommée par ce prénom. Par exemple,
+pour la voierie *Katarinalaan*, le prénom et l’avenue (*laan*) forment
+un seul mot. La fonction `name_be_extract` peut tout à fait détecter et
+extraire les prénoms à l’intérieur de mots plus longs (en indiquant
+l’option `respect_boundaries = FALSE`), mais alors la fonction détecte
+un grand nombre de faux positifs : elle détecte pour *Place de Ninove*
+les prénoms *Lac* et *Nino*, par exemple (le problème est le même en
 néérlandais).
 
 La solution qui a été trouvée est de maintenir le respect des frontières
 de mots (`respect_boundaries = TRUE` est l’option par défaut), et
-d’indiquer avec l’option `nl_street = TRUE` (utilisée dans l’exemple
-précédent) que l’on fait une recherche dans des rues en néérlandais. La
-fonction opère alors une série de corrections en REGEX au préalable pour
-rendre possible la détection des prénoms dans ce cas de figure. Le
+d’indiquer avec l’option `nl_detect = TRUE` (utilisée dans l’exemple
+précédent) que l’on fait une recherche dans des champs écrits en
+néérlandais. La fonction opère alors une série de corrections en REGEX
+au préalable pour rendre possible la détection des prénoms accolés à un
+certain nombre de types d’objets/institutions (pour l’instant :
+uniquement voieries et institutions scolaires jusqu’au secondaire). Le
 soucis de cette procédure est qu’elle demande des corrections
-spécifiques pour chaque type de détection : des institutions ne sont pas
-des rues. A terme, la solution est probablement de créer un dictionnaire
-de correction en néérlandais, reprendant des types de rue mais aussi
-d’institutions, pour englober le plus de cas possibles.
+particulières à la nature des données. A terme, la solution est
+probablement de créer un dictionnaire de correction en néérlandais,
+reprenant de nombreux objets/institutions, pour englober le plus de cas
+possibles. Cette solution demande cependant un gros travail dont je ne
+sais pas s’il est réellement faisable. Si quelqu’un a une autre
+solution, je suis preneur.

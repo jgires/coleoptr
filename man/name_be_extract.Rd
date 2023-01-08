@@ -17,23 +17,23 @@ name_be_extract(
 )
 }
 \arguments{
-\item{data_to_detect}{le data.frame d'interet}
+\item{data_to_detect}{le data.frame dans lequel detecter les prenoms}
 
-\item{col_to_detect}{le nom de la colonne dans laquelle detecter les presnoms}
+\item{col_to_detect}{le nom de la colonne qui contient les prenoms a detecter}
 
 \item{reference}{le dictionnaire des prenoms de reference}
 
-\item{numb_threshold}{le seuil de frequence minimale de prenoms pour le dictionnaire}
+\item{numb_threshold}{le seuil de frequence minimale des prenoms pour le dictionnaire}
 
-\item{length_threshold}{le seuil de longueur minimale de prenoms pour le dictionnaire}
+\item{length_threshold}{le seuil de longueur minimale des prenoms pour le dictionnaire}
 
-\item{exclude_dico}{exclure les noms communs de la detection}
+\item{exclude_dico}{exclure les noms communs frequents de la detection (en francais et neerlandais)}
 
 \item{spec_char_insens}{insensible aux caracteres speciaux dans la detection}
 
-\item{respect_boundaries}{respecter les frontieres des mots}
+\item{respect_boundaries}{respecte les frontieres des mots}
 
-\item{nl_street}{detection dans des noms de rue en neerlandais}
+\item{nl_street}{detection dans des rues en neerlandais}
 }
 \description{
 name_be_extract

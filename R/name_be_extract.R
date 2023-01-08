@@ -9,7 +9,7 @@
 #' @param exclude_dico exclure les noms communs frequents de la detection (en francais et neerlandais)
 #' @param spec_char_insens insensible aux caracteres speciaux dans la detection
 #' @param respect_boundaries respecte les frontieres des mots
-#' @param nl_street detection dans des rues en neerlandais
+#' @param nl_detect detection dans des rues en neerlandais
 #'
 #' @import dplyr
 #' @import readr
@@ -32,7 +32,7 @@ name_be_extract <- function(data_to_detect,
                             exclude_dico = NULL,
                             spec_char_insens = FALSE,
                             respect_boundaries = TRUE,
-                            nl_street = FALSE) {
+                            nl_detect = FALSE) {
 
   # Un stop si la colonne avec le nom n'est pas renseignee
   if (is.null(col_to_detect)) {
@@ -92,7 +92,12 @@ name_be_extract <- function(data_to_detect,
                                    "ten",
                                    "duc",
                                    "roc",
-                                   "saint"
+                                   "saint",
+
+                                   # ecoles nl
+                                   "aso",
+                                   "da",
+                                   "so"
     ))
 
   # On exlut les noms communs si exclude_dico == TRUE
@@ -138,9 +143,10 @@ name_be_extract <- function(data_to_detect,
   # Dans le cas de rues en NL
   # Voir: https://www.dbnl.org/tekst/stev002leid01_01/stev002leid01_01_0001.php
   # PROBLEME RESTANT : il reste les rues avec possessif : sstraat - slaan - splein...
-  if (nl_street == TRUE) {
+  if (nl_detect == TRUE) {
     data_to_detect <- data_to_detect %>%
-      mutate(col_to_detect = str_replace(col_to_detect, "nieuwstraat\\b", ""),
+      mutate(# rues
+             col_to_detect = str_replace(col_to_detect, "nieuwstraat\\b", ""),
              col_to_detect = str_replace(col_to_detect, "straat\\b", ""),
              col_to_detect = str_replace(col_to_detect, "laan\\b", ""),
              col_to_detect = str_replace(col_to_detect, "plaats\\b", ""),
@@ -183,7 +189,18 @@ name_be_extract <- function(data_to_detect,
              col_to_detect = str_replace(col_to_detect, "baan\\b", ""),
              col_to_detect = str_replace(col_to_detect, "abdij\\b", ""),
              col_to_detect = str_replace(col_to_detect, "kruispunt\\b", ""),
-             col_to_detect = str_replace(col_to_detect, "gang\\b", "")
+             col_to_detect = str_replace(col_to_detect, "gang\\b", ""),
+
+             # ecoles nl
+             col_to_detect = str_replace(col_to_detect, "college\\b", ""),
+             col_to_detect = str_replace(col_to_detect, "instituut\\b", ""),
+             col_to_detect = str_replace(col_to_detect, "school\\b", ""),
+             col_to_detect = str_replace(col_to_detect, "lyceum\\b", ""),
+             col_to_detect = str_replace(col_to_detect, "basisscholen\\b", ""),
+             col_to_detect = str_replace(col_to_detect, "scholen\\b", ""),
+             col_to_detect = str_replace(col_to_detect, "humaniora\\b", ""),
+             col_to_detect = str_replace(col_to_detect, "academie\\b", ""),
+             col_to_detect = str_replace(col_to_detect, "internaat\\b", "")
       )
   }
 
